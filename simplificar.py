@@ -58,14 +58,39 @@ def simplificar(numerador: int, denominador: int) -> typ.Tuple[int, int]:
 
     return -new_num if num_e_neg else new_num, -new_den if den_e_neg else new_den
 
+"""
 
-def soma_fracoes(numerador1, denominador1, numerador2, denominador2):
+Exemplo: 144/ 156 = 12/ 13
+>>> simplificar(144, 156)
+(12, 13)
+
+Exemplo: -32/104 = -4/13
+>>> simplificar(-32, 104)
+(-4, 13)
+"""
+
+
+def soma_fracoes(numerador1: int, denominador1: int, numerador2: int, denominador2: int) -> typ.Tuple[int, int]:
     """Soma frações e depois aplica simplificação"""
     novo_num = numerador1 * denominador2 + numerador2 * denominador1
     novo_den = denominador1 * denominador2
     return simplificar(novo_num, novo_den)
 
-def subtracao_fracoes(numerador1, denominador1, numerador2, denominador2):
+"""
+Somar duas frações:
+Exemplo: 2/3 + 7/3 = 3
+>>> soma_fracao(2, 3, 7, 3)
+(3, 1)
+
+
+Somar múltiplas frações:
+é quase intuitivo com exceção que ele retorna uma tupla e você precisa desempacotá-la
+Exemplo: 3/5 +6/7 + 5/7 + 8/3 = 508/105
+>>> soma_fracao(*soma_fracao(*soma_fracao(3,5, 6, 7), 5, 7), 8, 3)
+(508, 105)
+"""
+
+def subtracao_fracoes(numerador1: int, denominador1: int, numerador2: int, denominador2: int) -> typ.Tuple[int, int:
     """Subtrai frações e depois aplica simplificação"""
     novo_num = numerador1 * denominador2 - numerador2 * denominador1
     novo_den = denominador1 * denominador2
