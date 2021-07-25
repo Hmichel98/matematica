@@ -70,7 +70,7 @@ Exemplo: -32/104 = -4/13
 """
 
 
-def soma_fracoes(numerador1: int, denominador1: int, numerador2: int, denominador2: int) -> typ.Tuple[int, int]:
+def somar_fracoes(numerador1: int, denominador1: int, numerador2: int, denominador2: int) -> typ.Tuple[int, int]:
     """Soma frações e depois aplica simplificação"""
     novo_num = numerador1 * denominador2 + numerador2 * denominador1
     novo_den = denominador1 * denominador2
@@ -90,7 +90,7 @@ Exemplo: 3/5 +6/7 + 5/7 + 8/3 = 508/105
 (508, 105)
 """
 
-def subtracao_fracoes(numerador1: int, denominador1: int, numerador2: int, denominador2: int) -> typ.Tuple[int, int:
+def subtrair_fracoes(numerador1: int, denominador1: int, numerador2: int, denominador2: int) -> typ.Tuple[int, int:
     """Subtrai frações e depois aplica simplificação"""
     novo_num = numerador1 * denominador2 - numerador2 * denominador1
     novo_den = denominador1 * denominador2
