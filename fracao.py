@@ -1,4 +1,4 @@
-from simplificar import *
+from simplificar import somar_fracoes, subtrair_fracoes, simplificar
 
 
 class Fracao:
@@ -47,15 +47,29 @@ class Fracao:
 
 
 if __name__ == "__main__":
+    import functools
     print(Fracao(2, 3) + Fracao(3, 2))
     # 13/ 6
     print(sum([Fracao(2, 3), Fracao(2, 3), Fracao(4, 5)]))
     # 32/ 15
+    
     print(Fracao(3, 2) - Fracao(4, 5))
     # 7/ 10
+    
     print(Fracao(1, 2) * Fracao(3, 2) * Fracao(6, 7) * Fracao(9, 3))
     # 27/ 14
     print(Fracao(100) * Fracao(99, 2))
     # 4950/ 1
-    print(Fracao(5, 4) / Fracao(2, 7) / Fracao(4, 7) / Fracao(1, 3) / Fracao(1, 2))
+    
+    print(Fracao(5, 4) // Fracao(2, 7) // Fracao(4, 7) // Fracao(1, 3) // Fracao(1, 2))
     # 735/ 16
+    # RECOMENDAÇÃO DE USO
+    fracoes = [Fracao(5, 4), Fracao(2, 7), Fracao(4, 7), Fracao(1, 3), Fracao(1, 2)]
+    # Sem simplificação
+    print(functools.reduce(lambda fracao1, fracao2: fracao1 / fracao2, fracoes))
+    # 1470/ 32
+    # Com simplificação
+    print(functools.reduce(lambda fracao1, fracao2: fracao1 // fracao2, fracoes))
+    # 735/ 16
+    
+    
