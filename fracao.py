@@ -1,4 +1,4 @@
-from simplificar import somar_fracoes, subtrair_fracoes, simplificar
+from simplificar import *
 
 
 class Fracao:
@@ -18,6 +18,8 @@ class Fracao:
         return f"{self.numerador}/ {self.denominador}"
 
     def __add__(self, fracao2):
+        if isinstance(fracao2, int): 
+            return Fracao(*somar_fracoes(self.numerador, self.denominador, fracao2, 1))
         return Fracao(*somar_fracoes(self.numerador, self.denominador, fracao2.numerador, fracao2.denominador))
 
     def __radd__(self, fracao2):
@@ -26,10 +28,20 @@ class Fracao:
         else:
             return self.__add__(fracao2)
 
+    def __neg__(self):
+        return Fracao(-self.numerador, self.denominador)
+
     def __sub__(self, fracao2):
-        return Fracao(*subtrair_fracoes(self.numerador, self.denominador, fracao2.numerador, fracao2.denominador))
+        if isinstance(fracao2, int):
+            return (-self).__add__(fracao2)
+        return self.__add__(-fracao2)
+
+    def __rsub__(self, fracao2):
+        return self.__sub__(fracao2)
 
     def __mul__(self, fracao2):
+        if isinstance(fracao2, int):
+            return Fracao(*simplificar(self.numerador * fracao2, self.denominador))
         return Fracao(*simplificar(self.numerador * fracao2.numerador, self.denominador * fracao2.denominador))
 
     def __rmul__(self, fracao2):
@@ -47,29 +59,15 @@ class Fracao:
 
 
 if __name__ == "__main__":
-    import functools
     print(Fracao(2, 3) + Fracao(3, 2))
     # 13/ 6
     print(sum([Fracao(2, 3), Fracao(2, 3), Fracao(4, 5)]))
     # 32/ 15
-    
     print(Fracao(3, 2) - Fracao(4, 5))
     # 7/ 10
-    
     print(Fracao(1, 2) * Fracao(3, 2) * Fracao(6, 7) * Fracao(9, 3))
     # 27/ 14
     print(Fracao(100) * Fracao(99, 2))
     # 4950/ 1
-    
-    print(Fracao(5, 4) // Fracao(2, 7) // Fracao(4, 7) // Fracao(1, 3) // Fracao(1, 2))
+    print(Fracao(5, 4) / Fracao(2, 7) / Fracao(4, 7) / Fracao(1, 3) / Fracao(1, 2))
     # 735/ 16
-    # RECOMENDAÇÃO DE USO
-    fracoes = [Fracao(5, 4), Fracao(2, 7), Fracao(4, 7), Fracao(1, 3), Fracao(1, 2)]
-    # Sem simplificação
-    print(functools.reduce(lambda fracao1, fracao2: fracao1 / fracao2, fracoes))
-    # 1470/ 32
-    # Com simplificação
-    print(functools.reduce(lambda fracao1, fracao2: fracao1 // fracao2, fracoes))
-    # 735/ 16
-    
-    
